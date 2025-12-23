@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Komik Interaktif Pecahan</title>
+
+<style>
+body{
+  margin:0;
+  text-align:center;
+  font-family:Arial, sans-serif;
+}
+
+button{
+  padding:10px 20px;
+  margin:8px;
+  font-size:16px;
+}
+
+#welcome, #profil{
+  margin-top:80px;
+}
+
+#nav{ display:none; }
+
+#book{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  perspective:1200px;
+}
+
+#page{
+  width:100%;
+  max-height:80vh;
+  object-fit:contain;
+  transition:transform .6s;
+  transform-origin:right center;
+}
+
+#ggb{
+  display:none;
+  width:100%;
+  height:80vh;
+  border:0;
+}
+
+@media (max-width:600px){
+  button{ width:90%; }
+  #page{ max-height:70vh; }
+  #ggb{ height:70vh; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HALAMAN SAMBUTAN -->
+<div id="welcome">
+  <h1>👋 Selamat Datang</h1>
+  <p>Komik Interaktif<br>Penjumlahan Pecahan</p>
+  <button onclick="mulai()">📖 Mulai Baca Komik</button>
+</div>
+
+<!-- NAVIGASI -->
+<div id="nav">
+  <button onclick="prev()">Prev</button>
+  <button onclick="next()">Next</button>
+</div>
+
+<!-- BUKU -->
+<div id="book" style="display:none;">
+  <img id="page">
+  <iframe id="ggb"></iframe>
+</div>
+
+<!-- PROFIL -->
+<div id="profil" style="display:none;">
+  <h2>👩‍🏫 Profil Pembuat</h2>
+  <p><b>Nama:</b> Ni Luh Putu Sri Laksmi</p>
+  <p><b>NIM:</b> 2313011006</p>
+  <p><b>Program Studi:</b> Pendidikan Matematika</p>
+
+  <h3>🙏 Special Thanks</h3>
+  <p>
+    Dosen Pembimbing: Prof. Dr. I Made Candiasa, M.I.Kom<br>
+    Teman-Teman Kelas 5 Matematika Multimedia: Ratih, Rangga, Bertha<br>
+    Orang Tua & Keluarga<br>
+    Semua pihak yang mendukung
+  </p>
+
+  <button onclick="step=1; update(); document.getElementById('profil').style.display='none'; document.getElementById('book').style.display='block';">
+    🔁 Baca Ulang Komik
+  </button>
+</div>
+
+<script>
+let step = 0;
+const total = 17;
+
+const pages = {
+  1:"img/1.png", 2:"img/2.png", 3:"img/3.png",
+  5:"img/4.png", 6:"img/5.png", 7:"img/6.png", 8:"img/7.png",
+  10:"img/8.png",11:"img/9.png",12:"img/10.png",
+  14:"img/11.png",15:"img/12.png",16:"img/13.png"
+};
+
+const geogebra = {
+  4:"https://www.geogebra.org/material/iframe/id/rhj9jtee",
+  9:"https://www.geogebra.org/material/iframe/id/qk5ecuje",
+  13:"https://www.geogebra.org/material/iframe/id/mz6xhrff"
+};
+
+const welcome = document.getElementById("welcome");
+const nav = document.getElementById("nav");
+const book = document.getElementById("book");
+const profil = document.getElementById("profil");
+const page = document.getElementById("page");
+const ggb  = document.getElementById("ggb");
+
+function mulai(){
+  step = 1;
+  welcome.style.display="none";
+  nav.style.display="block";
+  book.style.display="block";
+  update();
+}
+
+function next(){
+  if(step < total){
+    if(!geogebra[step] && step < 16){
+      flip(()=>{ step++; update(); });
+    } else {
+      step++; update();
+    }
+  }
+}
+
+function prev(){
+  if(step > 1){
+    if(!geogebra[step-1] && step <= 16){
+      flip(()=>{ step--; update(); });
+    } else {
+      step--; update();
+    }
+  }
+}
+
+function update(){
+  if(step === 17){
+    book.style.display="none";
+    nav.style.display="none";
+    profil.style.display="block";
+    return;
+  }
+
+  profil.style.display="none";
+  nav.style.display="block";
+  book.style.display="block";
+
+  if(geogebra[step]){
+    page.style.display="none";
+    ggb.style.display="block";
+    ggb.src = geogebra[step];
+  } else {
+    page.style.display="block";
+    ggb.style.display="none";
+    page.src = pages[step];
+  }
+}
+
+function flip(done){
+  page.style.transform="rotateY(-180deg)";
+  setTimeout(()=>{
+    done();
+    page.style.transform="rotateY(0deg)";
+  },300);
+}
+</script>
+
+</body>
+</html>
