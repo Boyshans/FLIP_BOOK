@@ -1,0 +1,13 @@
+- [x] Tambahkan Tailwind CSS CDN di head
+- [x] Hapus seluruh tag <style>
+- [x] Ganti styling body dengan Tailwind classes
+- [x] Ganti styling button dengan Tailwind classes
+- [x] Ganti styling #welcome dan #profil dengan Tailwind classes
+- [x] Ganti styling #nav dengan Tailwind classes
+- [x] Ganti styling #book dengan Tailwind classes (perspective, shadow, rounded, bg)
+- [x] Ganti styling #page dengan Tailwind classes (transition, origin-left, preserve-3d, backface-hidden)
+- [x] Ganti styling #ggb dengan Tailwind classes
+- [x] Tambahkan responsive classes untuk mobile
+- [x] Perbaiki animasi flip di JS: sembunyikan iframe saat flip
+- [x] Tambahkan gradient background dan styling tombol modern
+- [x] Update desain buku menjadi minimalis dengan card yang terlihat seperti buku
